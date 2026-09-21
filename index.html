@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07113a">
+<title>DELTA'Soft — Développement logiciel, techniques appliquées</title>
+<meta name="description" content="DELTA'Soft — Développement logiciel, techniques appliquées.">
+<style>
+  :root{
+    --bg-0:#040816;
+    --bg-1:#07113a;
+    --bg-2:#0d1d67;
+    --ink:#f8fbff;
+    --muted:#b8c4ef;
+    --blue:#315aff;
+    --blue-2:#82adff;
+    --line:rgba(255,255,255,.12);
+    --line-soft:rgba(255,255,255,.075);
+    --glass:rgba(9,17,54,.58);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+
+  body{
+    min-height:100vh;
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 19% 18%, rgba(47,88,255,.25), transparent 29rem),
+      radial-gradient(circle at 83% 79%, rgba(62,108,255,.14), transparent 30rem),
+      linear-gradient(145deg,var(--bg-0) 0%,var(--bg-1) 52%,#05091c 100%);
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(var(--line-soft) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.78),transparent 94%);
+  }
+
+  .page{
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    padding:clamp(18px,4vw,52px);
+  }
+
+  .card{
+    position:relative;
+    width:min(1180px,100%);
+    min-height:min(720px,calc(100vh - 72px));
+    display:grid;
+    grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:34px;
+    background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.022));
+    box-shadow:0 30px 100px rgba(0,0,0,.44);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+  }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(135deg,rgba(255,255,255,.13),transparent 22%,transparent 72%,rgba(56,93,255,.13));
+  }
+
+  .visual,.content{position:relative;z-index:1}
+
+  .visual{
+    min-height:620px;
+    display:grid;
+    place-items:center;
+    padding:clamp(32px,5vw,70px);
+    border-right:1px solid var(--line);
+    background:
+      radial-gradient(circle at 50% 46%,rgba(72,109,255,.25),transparent 17rem),
+      linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,.004));
+  }
+
+  .visual::before,.visual::after{
+    content:"";
+    position:absolute;
+    width:15px;
+    height:15px;
+    opacity:.72;
+  }
+  .visual::before{top:24px;left:24px;border-left:1px solid rgba(255,255,255,.28);border-top:1px solid rgba(255,255,255,.28)}
+  .visual::after{right:24px;bottom:24px;border-right:1px solid rgba(255,255,255,.28);border-bottom:1px solid rgba(255,255,255,.28)}
+
+  .logo-scene{
+    position:relative;
+    width:min(440px,88%);
+    aspect-ratio:1;
+    display:grid;
+    place-items:center;
+    perspective:1100px;
+  }
+
+  .logo-scene::before{
+    content:"";
+    position:absolute;
+    inset:13%;
+    border-radius:50%;
+    border:1px solid rgba(115,153,255,.12);
+    box-shadow:0 0 0 46px rgba(93,132,255,.025),0 0 0 92px rgba(93,132,255,.012);
+  }
+
+  .logo-scene::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:10%;
+    width:58%;
+    height:9%;
+    transform:translateX(-50%);
+    border-radius:50%;
+    background:radial-gradient(ellipse,rgba(0,0,0,.58),transparent 70%);
+    filter:blur(10px);
+  }
+
+  .delta-mark{
+    position:relative;
+    z-index:1;
+    width:100%;
+    height:100%;
+    display:block;
+    transform-origin:50% 50%;
+    transform-box:fill-box;
+    transform-style:preserve-3d;
+    will-change:transform;
+    filter:drop-shadow(0 34px 44px rgba(0,0,0,.37));
+  }
+
+  .content{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:clamp(40px,6vw,82px);
+  }
+
+  .wordmark{
+    margin:0;
+    white-space:nowrap;
+    line-height:.95;
+    letter-spacing:-.055em;
+    font-size:clamp(2.85rem,6vw,5.8rem);
+    font-weight:850;
+  }
+
+  .delta-word{color:#fff;text-shadow:0 0 28px rgba(78,115,255,.12)}
+  .soft-word{margin-left:.06em;font-weight:580;font-style:italic;color:#9bb7ff}
+
+  .brand-line{
+    width:min(440px,82%);
+    height:4px;
+    margin:21px 0 30px;
+    border-radius:99px;
+    background:linear-gradient(90deg,#315aff 0 44%,#a7bdff 74%,rgba(255,255,255,.08) 100%);
+    box-shadow:0 0 24px rgba(47,88,255,.38);
+  }
+
+  .tagline{
+    margin:0;
+    max-width:none;
+    color:var(--muted);
+    font-size:clamp(.68rem,2.6vw,1.12rem);
+    line-height:1.35;
+    letter-spacing:0;
+    white-space:nowrap;
+  }
+  .tagline strong{color:#f7f9ff;font-weight:700}
+
+  .contact{
+    margin-top:42px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:12px 26px;
+    font-size:.96rem;
+  }
+
+  .contact a{
+    color:#dfe7ff;
+    text-decoration:none;
+    border-bottom:1px solid rgba(156,184,255,.32);
+    padding-bottom:3px;
+    transition:color .2s ease,border-color .2s ease;
+  }
+  .contact a:hover,.contact a:focus-visible{color:#fff;border-color:#86a9ff}
+  .contact a:focus-visible{outline:2px solid #a9beff;outline-offset:5px}
+
+  .contact .sep{width:3px;height:3px;border-radius:50%;background:#7185c8;opacity:.9}
+
+  .meta{
+    margin-top:auto;
+    padding-top:52px;
+    color:#7685b8;
+    font-size:.74rem;
+    letter-spacing:.035em;
+  }
+  .meta strong{color:#9aa9dc;font-weight:650}
+
+  @media (max-width:900px){
+    .page{padding:18px}
+    .card{min-height:auto;grid-template-columns:1fr;border-radius:26px}
+    .visual{min-height:340px;border-right:0;border-bottom:1px solid var(--line);padding:32px}
+    .logo-scene{width:min(325px,72vw)}
+    .content{padding:38px 30px 34px}
+    .wordmark{font-size:clamp(2.8rem,12vw,5.8rem)}
+    .meta{padding-top:40px}
+  }
+
+  @media (max-width:560px){
+    .page{padding:0}
+    .card{min-height:100vh;border-radius:0;border-left:0;border-right:0}
+    .visual{min-height:300px;padding:24px 18px}
+    .content{padding:32px 22px 28px}
+    .wordmark{font-size:clamp(2.55rem,13.4vw,4.2rem)}
+    .brand-line{margin-top:17px;margin-bottom:25px;width:88%}
+    .tagline{font-size:clamp(.68rem,2.9vw,.98rem);white-space:nowrap}
+    .contact{margin-top:34px;gap:10px 18px;font-size:.9rem}
+    .meta{padding-top:42px}
+  }
+
+  @media (max-width:390px){
+    .wordmark{font-size:clamp(2.3rem,12.7vw,3.2rem)}
+    .contact .sep{display:none}
+    .contact{align-items:flex-start;flex-direction:column}
+  }
+
+</style>
+</head>
+<body>
+  <main class="page">
+    <section class="card" aria-label="Carte de visite DELTA'Soft">
+      <div class="visual">
+        <div class="logo-scene" id="logoScene" aria-hidden="true">
+          <svg class="delta-mark" id="deltaMark" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="faceA" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#3766ff"/>
+                <stop offset=".58" stop-color="#1738e8"/>
+                <stop offset="1" stop-color="#0b1c8c"/>
+              </linearGradient>
+              <linearGradient id="faceB" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#a4c7ff"/>
+                <stop offset=".54" stop-color="#4f84ff"/>
+                <stop offset="1" stop-color="#1234bb"/>
+              </linearGradient>
+              <linearGradient id="faceC" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#091a82"/>
+                <stop offset=".55" stop-color="#1749f0"/>
+                <stop offset="1" stop-color="#6094ff"/>
+              </linearGradient>
+              <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ffffff" stop-opacity=".96"/>
+                <stop offset="1" stop-color="#a9c5ff" stop-opacity=".36"/>
+              </linearGradient>
+              <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="6.5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Géométrie de l'aile DELTA d'origine :
+                 deux faces hautes + une voilure basse en quadrilatère.
+                 Ce n'est volontairement pas un tétraèdre régulier. -->
+            <path d="M220 22 L16 394 L220 252 Z" fill="url(#faceA)"/>
+            <path d="M220 22 L220 252 L424 394 Z" fill="url(#faceB)"/>
+            <path d="M16 394 L220 252 L424 394 L220 326 Z" fill="url(#faceC)"/>
+
+            <!-- Silhouette extérieure en aile : le creux central bas est conservé. -->
+            <path d="M220 22 L16 394 L220 326 L424 394 Z"
+                  fill="none" stroke="#09113d" stroke-width="7"
+                  stroke-linejoin="round" opacity=".88"/>
+
+            <!-- Les trois arêtes caractéristiques convergent au même nœud central. -->
+            <g stroke="url(#rim)" stroke-width="4.2" stroke-linecap="round" filter="url(#glow)">
+              <path d="M220 22 L220 252"/>
+              <path d="M16 394 L220 252"/>
+              <path d="M424 394 L220 252"/>
+            </g>
+
+            <!-- Reflets très discrets : ils renforcent le volume sans changer la géométrie. -->
+            <path d="M220 28 L30 379" stroke="#89adff" stroke-opacity=".40" stroke-width="2"/>
+            <path d="M224 30 L410 379" stroke="#ffffff" stroke-opacity=".20" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="content">
+        <h1 class="wordmark" aria-label="DELTA'Soft"><span class="delta-word">DELTA</span><span class="soft-word">'Soft</span></h1>
+        <div class="brand-line" aria-hidden="true"></div>
+
+        <p class="tagline"><strong>DE</strong>veloppement <strong>L</strong>ogiciel, <strong>T</strong>echniques <strong>A</strong>ppliquées</p>
+
+        <div class="contact" aria-label="Contact">
+          <a href="mailto:infos@delta-soft.fr">infos@delta-soft.fr</a>
+          <span class="sep" aria-hidden="true"></span>
+          <a href="https://www.delta-soft.fr">delta-soft.fr</a>
+        </div>
+
+        <div class="meta">© 2026 <strong>DELTA'Soft</strong></div>
+      </div>
+    </section>
+  </main>
+
+<script>
+(function(){
+  const mark = document.getElementById('deltaMark');
+  const scene = document.getElementById('logoScene');
+  if (!mark || !scene) return;
+
+  // V3.5 : suivi direct de la souris. Aucun test "pointer: coarse" ou
+  // "prefers-reduced-motion" ne peut désactiver involontairement l'effet.
+  // Le DELTA reste vertical : seules les rotations 3D X/Y sont utilisées.
+  const maxTiltX = 13;
+  const maxTiltY = 16;
+  let tx = 0, ty = 0;
+  let cx = 0, cy = 0;
+  let raf = 0;
+
+  function setTarget(clientX, clientY){
+    const r = scene.getBoundingClientRect();
+    const mx = r.left + r.width / 2;
+    const my = r.top + r.height / 2;
+
+    // Rapport à la demi-largeur / demi-hauteur de la fenêtre :
+    // la réaction reste progressive même lorsque la souris est loin du logo.
+    const nx = Math.max(-1, Math.min(1, (clientX - mx) / Math.max(1, window.innerWidth / 2)));
+    const ny = Math.max(-1, Math.min(1, (clientY - my) / Math.max(1, window.innerHeight / 2)));
+
+    ty = nx * maxTiltY;
+    tx = -ny * maxTiltX;
+  }
+
+  function render(){
+    cx += (tx - cx) * 0.12;
+    cy += (ty - cy) * 0.12;
+
+    // perspective() est intégrée au transform : comportement plus constant
+    // entre Chrome/Edge/Firefox, y compris pour un SVG inline.
+    mark.style.transform =
+      'perspective(720px) rotateX(' + cx.toFixed(2) + 'deg) ' +
+      'rotateY(' + cy.toFixed(2) + 'deg) scale(1.018)';
+
+    raf = requestAnimationFrame(render);
+  }
+
+  // mousemove est volontairement utilisé ici plutôt que pointermove :
+  // il évite les cas de PC Windows hybrides où la détection tactile
+  // neutralisait l'animation alors qu'une souris était utilisée.
+  document.addEventListener('mousemove', function(e){
+    setTarget(e.clientX, e.clientY);
+  }, {passive:true});
+
+  document.addEventListener('mouseleave', function(){
+    tx = 0;
+    ty = 0;
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
