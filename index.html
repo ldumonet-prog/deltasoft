@@ -274,8 +274,32 @@
     color:#7685b8;
     font-size:.74rem;
     letter-spacing:.035em;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px 18px;
   }
   .meta strong{color:#9aa9dc;font-weight:650}
+  .legal-nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 14px;
+  }
+  .legal-nav a{
+    color:#7f90c5;
+    text-decoration:none;
+    border-bottom:1px solid rgba(127,144,197,.22);
+    padding-bottom:1px;
+    transition:color .2s ease,border-color .2s ease;
+  }
+  .legal-nav a:hover,.legal-nav a:focus-visible{
+    color:#dfe7ff;
+    border-color:#86a9ff;
+  }
+  .legal-nav a:focus-visible{
+    outline:2px solid #a9beff;
+    outline-offset:4px;
+  }
 
   @media (max-width:900px){
     .page{padding:18px}
@@ -392,7 +416,14 @@
           <a href="https://www.delta-soft.fr">delta-soft.fr</a>
         </div>
 
-        <div class="meta">© 2026 <strong>DELTA'Soft</strong></div>
+        <div class="meta">
+          <span>© 2026 <strong>DELTA'Soft</strong></span>
+          <nav class="legal-nav" aria-label="Informations légales">
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="confidentialite.html">Confidentialité</a>
+            <a href="cookies.html">Cookies</a>
+          </nav>
+        </div>
       </div>
     </section>
   </main>
