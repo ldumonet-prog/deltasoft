@@ -195,8 +195,8 @@
   .content{
     display:flex;
     flex-direction:column;
-    justify-content:center;
-    padding:clamp(40px,6vw,82px);
+    justify-content:flex-start;
+    padding:clamp(40px,5vw,62px) clamp(40px,6vw,82px) clamp(30px,4vw,48px);
   }
 
   .wordmark{
@@ -248,7 +248,7 @@
   .tagline strong{color:#f7f9ff;font-weight:700}
 
   .contact{
-    margin-top:42px;
+    margin-top:18px;
     display:flex;
     flex-wrap:wrap;
     align-items:center;
@@ -268,9 +268,88 @@
 
   .contact .sep{width:3px;height:3px;border-radius:50%;background:#7185c8;opacity:.9}
 
+  .services{
+    margin-top:28px;
+    display:grid;
+    gap:8px;
+    width:min(100%,500px);
+  }
+
+  .service-card{
+    position:relative;
+    padding:10px 14px 10px 16px;
+    border:1px solid rgba(145,174,255,.13);
+    border-radius:12px;
+    background:linear-gradient(90deg,rgba(47,74,158,.13),rgba(20,35,91,.055));
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.025) inset,
+      0 0 0 rgba(0,0,0,0);
+    transition:
+      transform .20s ease,
+      border-color .20s ease,
+      background .20s ease,
+      box-shadow .20s ease;
+  }
+
+  .service-card:hover{
+    transform:translateY(-2px) scale(1.012);
+    border-color:rgba(145,180,255,.34);
+    background:
+      linear-gradient(90deg,rgba(68,104,218,.23),rgba(38,61,145,.14));
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.08) inset,
+      0 8px 24px rgba(10,20,62,.22),
+      0 0 18px rgba(76,112,255,.16);
+  }
+
+  .service-card:hover::before{
+    opacity:1;
+    box-shadow:0 0 10px rgba(113,151,255,.55);
+  }
+
+  .service-card:hover h2{
+    color:#ffffff;
+    text-shadow:0 0 10px rgba(125,157,255,.22);
+  }
+
+  .service-card:hover p{
+    color:#cbd7f8;
+  }
+
+  .service-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:10px;
+    bottom:10px;
+    width:2px;
+    border-radius:2px;
+    background:linear-gradient(180deg,#315aff,#8dacff);
+    opacity:.72;
+    transition:opacity .20s ease, box-shadow .20s ease;
+  }
+
+  .service-card h2{
+    margin:0 0 3px;
+    color:#edf2ff;
+    font-size:.86rem;
+    line-height:1.2;
+    font-weight:720;
+    letter-spacing:.005em;
+    transition:color .20s ease,text-shadow .20s ease;
+  }
+
+  .service-card p{
+    margin:0;
+    color:#aebbe4;
+    font-size:.73rem;
+    line-height:1.32;
+    transition:color .20s ease;
+  }
+
   .meta{
     margin-top:auto;
-    padding-top:52px;
+    padding-top:24px;
     color:#7685b8;
     font-size:.74rem;
     letter-spacing:.035em;
@@ -308,6 +387,10 @@
     .logo-scene{width:min(265px,62vw)}
     .content{padding:38px 30px 34px}
     .wordmark{font-size:clamp(2.8rem,12vw,5.8rem)}
+    .services{margin-top:26px;gap:8px;width:100%}
+    .service-card{padding:10px 13px 10px 15px}
+    .service-card h2{font-size:.84rem}
+    .service-card p{font-size:.72rem}
     .tech-icon{transform:scale(.88);transform-origin:center}
     .meta{padding-top:40px}
   }
@@ -321,9 +404,13 @@
     .wordmark{font-size:clamp(2.55rem,13.4vw,4.2rem)}
     .brand-line{margin-top:17px;margin-bottom:25px;width:clamp(260px,78vw,392px)}
     .tagline{font-size:clamp(.68rem,2.9vw,.98rem);white-space:nowrap}
-    .contact{margin-top:34px;gap:10px 18px;font-size:.9rem}
+    .contact{margin-top:28px;gap:10px 18px;font-size:.9rem}
+    .services{margin-top:24px;gap:7px}
+    .service-card{padding:9px 12px 9px 14px;border-radius:10px}
+    .service-card h2{font-size:.82rem}
+    .service-card p{font-size:.70rem;line-height:1.3}
     .tech-icon{transform:scale(.70);transform-origin:center}
-    .meta{padding-top:42px}
+    .meta{padding-top:30px}
   }
 
   @media (max-width:390px){
@@ -409,6 +496,29 @@
         <div class="brand-line" aria-hidden="true"><span class="brand-line-blue"></span><span class="brand-line-black"></span></div>
 
         <p class="tagline"><strong>DE</strong>veloppement <strong>L</strong>ogiciel, <strong>T</strong>echniques <strong>A</strong>ppliquées</p>
+
+        <section class="services" aria-label="Prestations">
+          <article class="service-card">
+            <h2>Audit &amp; cadrage</h2>
+            <p>Processus, besoins, architecture, faisabilité, feuille de route.</p>
+          </article>
+          <article class="service-card">
+            <h2>Traçabilité &amp; AIDC</h2>
+            <p>RFID, 1D/2D, QR Code, mobilité, IoT.</p>
+          </article>
+          <article class="service-card">
+            <h2>Flux industriels &amp; logistiques</h2>
+            <p>Stocks, inventaires, kitting, bord de ligne, AMR.</p>
+          </article>
+          <article class="service-card">
+            <h2>AMOA &amp; choix de solutions</h2>
+            <p>Besoin, consultation, comparaison, POC, déploiement.</p>
+          </article>
+          <article class="service-card">
+            <h2>Avant-vente &amp; AO</h2>
+            <p>Dossiers techniques, charges, risques, planning, coordination.</p>
+          </article>
+        </section>
 
         <div class="contact" aria-label="Contact">
           <a href="mailto:infos@delta-soft.fr">infos@delta-soft.fr</a>
