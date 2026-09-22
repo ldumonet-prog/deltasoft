@@ -649,11 +649,11 @@
     }
   }
 
-  document.addEventListener('mousemove', function(e){
+  visual.addEventListener('mousemove', function(e){
     setTarget(e.clientX, e.clientY);
   }, {passive:true});
 
-  document.addEventListener('mouseleave', function(){
+  visual.addEventListener('mouseleave', function(){
     targetMoveX = 0;
     targetMoveY = 0;
     targetTiltX = 0;
